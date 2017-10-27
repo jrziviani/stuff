@@ -113,6 +113,11 @@ namespace stuff
             return res;
         }
 
+        T look()                                   // O(1)
+        {
+            return _heap.front();
+        }
+
         bool is_empty()
         {
             return _heap.is_empty();
