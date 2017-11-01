@@ -11,10 +11,9 @@ namespace stuff
 {
     inline size_t get_pivot(size_t left, size_t right)
     {
-        return left;
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<size_t> dis(left, right - 1);
+        std::uniform_int_distribution<size_t> dis(left, right);
         return dis(gen);
     }
 
