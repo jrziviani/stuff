@@ -42,7 +42,16 @@ namespace stuff
         vector(size_t capacity) :
             _capacity(capacity),
             _size(0),
-            _arr(std::make_unique<T[]>(capacity)) {}
+            _arr(std::make_unique<T[]>(capacity))
+        {
+        }
+
+        vector(size_t capacity, T init) :
+            vector(capacity)
+        {
+            for (size_t i = 0; i < capacity; i++)
+                append(init);
+        }
 
         void append(const T &d)                   // O(1)
         {

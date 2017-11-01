@@ -36,6 +36,52 @@ namespace stuff
             _tail(nullptr),
             _size(0) {}
 
+        ~list()
+        {
+        }
+
+        list(const list &l)
+        {
+            l.const_iterate([this](const T &v) {
+                this->append(v);
+            });
+        }
+
+        list(list &&l)
+        {
+            _head = std::move(l._head);
+            _tail = std::move(l._tail);
+            _size = l._size;
+            l._size = 0;
+        }
+
+        list &operator=(const list &l)
+        {
+            if (&l == this)
+                return *this;
+
+            node *iter = _head.get();
+            while (iter != nullptr) {
+                append(iter->data);
+                iter = iter->next.get();
+            }
+
+            return *this;
+        }
+
+        list &operator=(list &&l)
+        {
+            if (&l == this)
+                return *this;
+
+            _head = std::move(l._head);
+            _tail = std::move(l._tail);
+            _size = l._size;
+            l._size = 0;
+
+            return *this;
+        }
+
         void append(const T &d)                    // O(1)
         {
             if (_head == nullptr) {
@@ -108,6 +154,15 @@ namespace stuff
         }
 
         void iterate(std::function<void(T&)> fn)     // O(n)
+        {
+            node *iter = _head.get();
+            while (iter != nullptr) {
+                fn(iter->data);
+                iter = iter->next.get();
+            }
+        }
+
+        void const_iterate(std::function<void(const T&)> fn) // O(n)
         {
             node *iter = _head.get();
             while (iter != nullptr) {
