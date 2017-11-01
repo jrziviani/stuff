@@ -22,6 +22,11 @@ namespace stuff
             return _stack.pop();
         }
 
+        T peek()
+        {
+            return _stack[_stack.size() - 1];
+        }
+
         bool is_empty()                     // O(1)
         {
             return _stack.is_empty();

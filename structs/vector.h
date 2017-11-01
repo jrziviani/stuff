@@ -85,7 +85,7 @@ namespace stuff
 
             if (_capacity > 20 && _size <= _capacity / 4)
                 shrink();
-            
+
             T ret = _arr[0];
             for (size_t i = 1; i < _size; i++) {
                 _arr[i - 1] = _arr[i];
