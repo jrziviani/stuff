@@ -22,8 +22,8 @@ namespace stuff
     template <typename T>
     class heap
     {
-        vector<T> _heap;
-        std::function<bool(const T &a, const T &b)> _compare;
+        vector<T> heap_;
+        std::function<bool(const T &a, const T &b)> compare_;
 
         size_t parent(size_t i) const              // O(1)
         {
@@ -48,24 +48,24 @@ namespace stuff
 
         bool has_left(size_t i) const              // O(1)
         {
-            return left(i) < _heap.size();
+            return left(i) < heap_.size();
         }
 
         bool has_right(size_t i) const             // O(1)
         {
-            return right(i) < _heap.size();
+            return right(i) < heap_.size();
         }
 
         void heap_up()                             // O(log n)
         {
-            size_t cur = _heap.size() - 1;
+            size_t cur = heap_.size() - 1;
 
             while (has_parent(cur)) {
                 size_t par = parent(cur);
-                if (!_compare(_heap[cur], _heap[par]))
+                if (!compare_(heap_[cur], heap_[par]))
                     break;
 
-                _heap.swap(cur, par);
+                heap_.swap(cur, par);
                 cur = par;
             }
         }
@@ -77,14 +77,14 @@ namespace stuff
             while (has_left(cur)) {
                 size_t child = left(cur);
 
-                if (has_right(cur) && _compare(_heap[right(cur)], _heap[child])) {
+                if (has_right(cur) && compare_(heap_[right(cur)], heap_[child])) {
                     child = right(cur);
                 }
 
-                if (!_compare(_heap[child], _heap[cur]))
+                if (!compare_(heap_[child], heap_[cur]))
                     break;
 
-                _heap.swap(cur, child);
+                heap_.swap(cur, child);
                 cur = child;
             }
         }
@@ -94,20 +94,20 @@ namespace stuff
             heap(compare_max<T>) {}
 
         heap(std::function<bool(const T &a, const T &b)> fn) :
-            _compare(fn) {}
+            compare_(fn) {}
 
         void insert(T d)                           // O(log n)
         {
-            _heap.append(d);
+            heap_.append(d);
             heap_up(); // O(log n)
         }
 
         T remove()                                 // O(log n)
         {
-            T res = _heap.front();
-            auto tmp = _heap.pop();
-            if (!_heap.is_empty()) {
-                _heap[0] = tmp;
+            T res = heap_.front();
+            auto tmp = heap_.pop();
+            if (!heap_.is_empty()) {
+                heap_[0] = tmp;
                 heap_down();  // O(log n)
             }
             return res;
@@ -115,12 +115,12 @@ namespace stuff
 
         T look()                                   // O(1)
         {
-            return _heap.front();
+            return heap_.front();
         }
 
         bool is_empty()
         {
-            return _heap.is_empty();
+            return heap_.is_empty();
         }
     };
 

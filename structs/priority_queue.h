@@ -8,7 +8,7 @@ namespace stuff
     template <typename T>
     class priority_queue
     {
-        heap<T> _heap;
+        heap<T> heap_;
 
         public:
         enum class type {
@@ -19,26 +19,26 @@ namespace stuff
         public:
         priority_queue() {}
         priority_queue(type t) :
-            _heap((t == type::MAX_PRIORITY) ? compare_max<T> : compare_min<T>) {}
+            heap_((t == type::MAX_PRIORITY) ? compare_max<T> : compare_min<T>) {}
 
         void enqueue(T d)
         {
-            _heap.insert(d);
+            heap_.insert(d);
         }
 
         T dequeue()
         {
-            return _heap.remove();
+            return heap_.remove();
         }
 
         bool is_empty()
         {
-            return _heap.is_empty();
+            return heap_.is_empty();
         }
 
         T top()
         {
-            return _heap.look();
+            return heap_.look();
         }
     };
 }

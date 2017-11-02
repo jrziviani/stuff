@@ -9,59 +9,59 @@ namespace stuff
     template <typename T>
     class vector_stack
     {
-        vector<T> _stack;
+        vector<T> stack_;
 
         public:
         void push(T d)                      // ~O(1)
         {
-            _stack.append(d);
+            stack_.append(d);
         }
 
         T pop()                             // ~O(1)
         {
-            return _stack.pop();
+            return stack_.pop();
         }
 
         T peek()
         {
-            return _stack[_stack.size() - 1];
+            return stack_[stack_.size() - 1];
         }
 
         bool is_empty()                     // O(1)
         {
-            return _stack.is_empty();
+            return stack_.is_empty();
         }
 
         size_t size()                       // O(1)
         {
-            return _stack.size();
+            return stack_.size();
         }
     };
 
     template <typename T>
     class list_stack
     {
-        list<T> _list;
+        list<T> list_;
 
         public:
         void push(T d)                      // O(1)
         {
-            _list.append(d);
+            list_.append(d);
         }
 
         T pop()                             // O(1)
         {
-            return _list.pop();
+            return list_.pop();
         }
 
         bool is_empty()                     // O(1)
         {
-            return _list.is_empty();
+            return list_.is_empty();
         }
 
         size_t size()                       // O(1)
         {
-            return _list.size();
+            return list_.size();
         }
     };
 }
