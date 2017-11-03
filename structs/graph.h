@@ -45,18 +45,27 @@ namespace stuff
             edge_.append(w);
         }
 
-        size_t size()
+        size_t size() const
         {
             return edge_.size();
         }
 
-        void iterate(std::function<void(int&)> fn)
+        void iterate(std::function<void(const int &)> fn) const
         {
-            edge_.iterate(fn);
+            edge_.const_iterate(fn);
         }
     };
 
-    class graph
+    class graph_base
+    {
+        public:
+        virtual void add_edge(int v, int w) = 0;
+        virtual const edge &adj(int v) = 0;
+        virtual int vertices() const = 0;
+        virtual int edges() const = 0;
+    };
+
+    class graph : public graph_base
     {
         vector<edge> adj_;
         size_t edges_;
@@ -78,12 +87,17 @@ namespace stuff
             edges_++;
         }
 
-        int vertices()
+        const edge &adj(int v)
+        {
+            return adj_[v];
+        }
+
+        int vertices() const
         {
             return adj_.size();
         }
 
-        int edges()
+        int edges() const
         {
             return edges_;
         }
@@ -107,7 +121,7 @@ namespace stuff
             return max;
         }
 
-        double average_degree()
+        double average_degree() const
         {
             return 2.0 * edges() / vertices();
         }

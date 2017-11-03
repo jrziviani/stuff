@@ -51,8 +51,8 @@ namespace stuff
         {
             head_ = std::move(l.head_);
             tail_ = std::move(l.tail_);
-            size_ = l._size;
-            l._size = 0;
+            size_ = l.size_;
+            l.size_ = 0;
         }
 
         list &operator=(const list &l)
@@ -76,8 +76,8 @@ namespace stuff
 
             head_ = std::move(l.head_);
             tail_ = std::move(l.tail_);
-            size_ = l._size;
-            l._size = 0;
+            size_ = l.size_;
+            l.size_ = 0;
 
             return *this;
         }
@@ -162,7 +162,7 @@ namespace stuff
             }
         }
 
-        void const_iterate(std::function<void(const T&)> fn) // O(n)
+        void const_iterate(std::function<void(const T&)> fn) const // O(n)
         {
             node *iter = head_.get();
             while (iter != nullptr) {
@@ -190,7 +190,7 @@ namespace stuff
             return head_ == nullptr;
         }
 
-        size_t size()                              // O(1)
+        size_t size() const                        // O(1)
         {
             return size_;
         }
