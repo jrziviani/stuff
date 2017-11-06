@@ -1,5 +1,5 @@
-#ifndef _SELECTION_H
-#define _SELECTION_H
+#ifndef SELECTION_H_
+#define SELECTION_H_
 
 #include "vector.h"
 #include "list.h"

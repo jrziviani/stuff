@@ -1,5 +1,5 @@
-#ifndef _STACK_H
-#define _STACK_H
+#ifndef STACK_H_
+#define STACK_H_
 
 #include "list.h"
 #include "vector.h"

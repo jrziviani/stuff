@@ -1,5 +1,5 @@
-#ifndef _HEAP_H
-#define _HEAP_H
+#ifndef HEAP_H_
+#define HEAP_H_
 
 #include "vector.h"
 #include <functional>

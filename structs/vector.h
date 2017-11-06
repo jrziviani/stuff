@@ -1,5 +1,5 @@
-#ifndef _DVECTOR_H
-#define _DVECTOR_H
+#ifndef VECTOR_H_
+#define VECTOR_H_
 
 #include <memory>
 #include <functional>

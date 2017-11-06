@@ -1,5 +1,5 @@
-#ifndef _QUEUE_H
-#define _QUEUE_H
+#ifndef QUEUE_H_
+#define QUEUE_H_
 
 #include "list.h"
 #include "vector.h"

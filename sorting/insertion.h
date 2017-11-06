@@ -1,5 +1,5 @@
-#ifndef _INSERTION_H
-#define _INSERTION_H
+#ifndef INSERTION_H_
+#define INSERTION_H_
 
 #include "vector.h"
 #include "list.h"

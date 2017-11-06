@@ -1,5 +1,5 @@
-#ifndef _MERGESORT_H
-#define _MERGESORT_H
+#ifndef MERGESORT_H_
+#define MERGESORT_H_
 
 #include "vector.h"
 #include "list.h"

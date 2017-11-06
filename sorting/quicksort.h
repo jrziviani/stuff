@@ -1,5 +1,5 @@
-#ifndef _QUICKSORT_H
-#define _QUICKSORT_H
+#ifndef QUICKSORT_H_
+#define QUICKSORT_H_
 
 #include "vector.h"
 #include "list.h"

@@ -1,5 +1,5 @@
-#ifndef _CONNECTED_H
-#define _CONNECTED_H
+#ifndef CONNECTED_H_
+#define CONNECTED_H_
 
 #include "vector.h"
 #include "graph.h"

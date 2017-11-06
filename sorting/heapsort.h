@@ -1,5 +1,5 @@
-#ifndef _HEAPSORT_H
-#define _HEAPSORT_H
+#ifndef HEAPSORT_H_
+#define HEAPSORT_H_
 
 namespace stuff
 {

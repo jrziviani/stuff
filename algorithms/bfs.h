@@ -1,5 +1,5 @@
-#ifndef _BFS_H
-#define _BFS_H
+#ifndef BFS_H_
+#define BFS_H_
 
 #include "queue.h"
 #include "graph.h"

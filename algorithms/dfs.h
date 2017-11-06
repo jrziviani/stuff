@@ -1,5 +1,5 @@
-#ifndef _DFS_H
-#define _DFS_H
+#ifndef DFS_H_
+#define DFS_H_
 
 #include "stack.h"
 #include "graph.h"
