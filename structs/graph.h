@@ -4,32 +4,108 @@
 #include "vector.h"
 #include "list.h"
 
+#include <iterator>
+
 namespace stuff
 {
-    class edge
+    namespace priv
+    {
+        class edge_iterator
+        {
+            const list<int> *const edge_;
+            size_t current_;
+
+            private:
+            int get_current() const
+            {
+                if (edge_ == nullptr)
+                    return -1;
+
+                return (*edge_)[current_];
+            }
+
+            public:
+            using value_type = const int;
+            using difference_type = const std::ptrdiff_t;
+            using pointer = const int*;
+            using reference = const int&;
+            using iterator_category = std::output_iterator_tag;
+
+            edge_iterator() = default;
+            explicit edge_iterator(const list<int> *const e) :
+                edge_(e),
+                current_(0)
+            {
+            }
+
+            reference operator*() const
+            {
+                return (*edge_)[current_];
+            }
+
+            edge_iterator& operator++()
+            {
+                current_++;
+                return *this;
+            }
+
+            edge_iterator operator++(int)
+            {
+                auto tmp = *this;
+                current_++;
+                return tmp;
+            }
+
+            edge_iterator& operator--()
+            {
+                current_--;
+                return *this;
+            }
+
+            edge_iterator operator--(int)
+            {
+                auto tmp = *this;
+                current_--;
+                return tmp;
+            }
+
+            bool operator==(const edge_iterator &rhs) const
+            {
+                return (*edge_)[current_] == rhs.get_current();
+            }
+
+            bool operator!=(const edge_iterator &rhs)
+            {
+                return current_ < (*edge_).size();
+            }
+        };
+    }
+
+    class edges
     {
         list<int> edge_;
+        using iterator = priv::edge_iterator;
 
         public:
-        edge()
+        edges()
         {
         }
 
-        ~edge()
+        ~edges()
         {
         }
 
-        edge(const edge &l)
+        edges(const edges &l)
         {
             edge_ = l.edge_;
         }
 
-        edge(edge &&l)
+        edges(edges &&l)
         {
             edge_ = std::move(l.edge_);
         }
 
-        edge &operator=(const edge &l)
+        edges &operator=(const edges &l)
         {
             if (this == &l)
                 return *this;
@@ -38,7 +114,7 @@ namespace stuff
             return *this;
         }
 
-        edge &operator=(edge &&) = delete;
+        edges &operator=(edges &&) = delete;
 
         void add(int w)
         {
@@ -54,25 +130,37 @@ namespace stuff
         {
             edge_.const_iterate(fn);
         }
+
+        iterator begin() const
+        {
+            return iterator(&edge_);
+        }
+
+        iterator end() const
+        {
+            return iterator(nullptr);
+        }
     };
 
     class graph_base
     {
         public:
         virtual void add_edge(int v, int w) = 0;
-        virtual const edge &adj(int v) = 0;
-        virtual int vertices() const = 0;
-        virtual int edges() const = 0;
+        virtual const edges &adj(int v) = 0;
+        virtual int nvertices() const = 0;
+        virtual int nedges() const = 0;
     };
 
     class graph : public graph_base
     {
-        vector<edge> adj_;
+        vector<edges> adj_;
         size_t edges_;
+
+        //using iterator = priv::graph_iterator;
 
         public:
         graph(int size) :
-            adj_(size, edge())
+            adj_(size, edges())
         {
         }
 
@@ -87,17 +175,17 @@ namespace stuff
             edges_++;
         }
 
-        const edge &adj(int v)
+        const edges &adj(int v)
         {
             return adj_[v];
         }
 
-        int vertices() const
+        int nvertices() const
         {
             return adj_.size();
         }
 
-        int edges() const
+        int nedges() const
         {
             return edges_;
         }
@@ -123,7 +211,7 @@ namespace stuff
 
         double average_degree() const
         {
-            return 2.0 * edges() / vertices();
+            return 2.0 * nedges() / nvertices();
         }
 
         int number_self_loops()
@@ -135,6 +223,17 @@ namespace stuff
             }
             return count / 2;
         }
+/*
+        iterator begin()
+        {
+
+        }
+
+        iterator end()
+        {
+
+        }
+        */
     };
 }
 

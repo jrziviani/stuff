@@ -14,7 +14,7 @@ namespace stuff
                             std::function<void(int v)> fn)
     {
         vector_stack<int> s;
-        vector<bool> visited(g.vertices(), false);
+        vector<bool> visited(g.nvertices(), false);
 
         for (size_t i = 0; i < start.size(); i++) {
             s.push(start[i]);

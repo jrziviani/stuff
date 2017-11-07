@@ -135,7 +135,7 @@ namespace stuff
             return ret;
         }
 
-        T& at(size_t position)                     // O(n)
+        const T& at(size_t position) const               // O(n)
         {
             if (position >= size_)
                 throw std::out_of_range("out of range");
@@ -180,7 +180,7 @@ namespace stuff
             }
         }
 
-        T &operator[](std::size_t position)        // 0(n)
+        const T &operator[](std::size_t position) const  // 0(n)
         {
             return at(position);
         }

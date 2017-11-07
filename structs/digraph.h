@@ -7,12 +7,12 @@ namespace stuff
 {
     class digraph : public graph_base
     {
-        vector<edge> adj_;
+        vector<edges> adj_;
         size_t edges_;
 
         public:
         digraph(int size) :
-              adj_(size, edge())
+              adj_(size, edges())
         {
         }
 
@@ -26,24 +26,19 @@ namespace stuff
             edges_++;
         }
 
-        const edge &adj(int v)
+        const edges &adj(int v)
         {
             return adj_[v];
         }
 
-        int vertices() const
+        int nvertices() const
         {
             return adj_.size();
         }
 
-        int edges() const
+        int nedges() const
         {
             return edges_;
-        }
-
-        digraph reverse()
-        {
-
         }
     };
 }

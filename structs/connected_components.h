@@ -29,11 +29,11 @@ namespace stuff
 
         public:
         connected_components(graph &g) :
-            marked_(g.vertices(), false),
-            ids_(g.vertices(), -1),
+            marked_(g.nvertices(), false),
+            ids_(g.nvertices(), -1),
             count_(0)
         {
-            for (size_t v = 0; v < g.vertices(); v++) {
+            for (size_t v = 0; v < g.nvertices(); v++) {
                 if (marked_[v])
                     continue;
 

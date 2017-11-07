@@ -17,9 +17,9 @@ namespace stuff
 
         public:
         topological_sort(digraph &g) :
-            visited_(g.vertices(), false)
+            visited_(g.nvertices(), false)
         {
-            for (size_t v = 0; v < g.vertices(); v++) {
+            for (size_t v = 0; v < g.nvertices(); v++) {
                 if (visited_[v])
                     continue;
 
