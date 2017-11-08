@@ -31,11 +31,11 @@ namespace stuff
         {
             visited_[v] = true;
 
-            const auto visit = [this, &g](const int &w) {
-                if (visited_[w])
+            const auto visit = [this, &g](const edge &w) {
+                if (visited_[w.to])
                     return;
 
-                dfs(g, w);
+                dfs(g, w.to);
             };
             g.adj(v).iterate(visit);
             reverse_.push(v);

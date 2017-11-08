@@ -18,11 +18,11 @@ namespace stuff
             marked_[v] = true;
             ids_[v] = count_;
 
-            const auto visit = [&g, this](const int &w) {
-                if (marked_[w])
+            const auto visit = [&g, this](const edge &w) {
+                if (marked_[w.to])
                     return;
 
-                dfs(g, w);
+                dfs(g, w.to);
             };
             g.adj(v).iterate(visit);
         }

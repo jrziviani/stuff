@@ -26,10 +26,10 @@ namespace stuff
 
             fn(v);
 
-            const auto visit = [&s, &visited](const int &w) {
-                if (!visited[w]) {
-                    visited[w] = true;
-                    s.push(w);
+            const auto visit = [&s, &visited](const edge &w) {
+                if (!visited[w.to]) {
+                    visited[w.to] = true;
+                    s.push(w.to);
                 }
             };
             g.adj(v).iterate(visit);

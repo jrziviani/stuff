@@ -5,18 +5,66 @@
 #include "list.h"
 
 #include <iterator>
+#include <ostream>
 
 namespace stuff
 {
+    struct edge
+    {
+        int to;
+        double weight;
+
+        edge(int t, double w) :
+            to(t), weight(w)
+        {
+        }
+
+        edge(int t) :
+            edge(t, 0.0)
+        {
+        }
+
+        edge() :
+            edge(0)
+        {
+        }
+
+        bool operator==(const edge &other) const
+        {
+            return (other.to == to && other.weight == weight);
+        }
+
+        bool operator>(const edge &other) const
+        {
+            if (other.weight == weight)
+                return other.to > to;
+
+            return other.weight > weight;
+        }
+
+        bool operator<(const edge &other) const
+        {
+            return !this->operator>(other);
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const edge &e);
+    };
+
+    std::ostream& operator<<(std::ostream& os, const edge &e)
+    {
+        os << "edge: " << e.to << ", weight: " << e.weight;
+        return os;
+    }
+
     namespace priv
     {
         class edge_iterator
         {
-            const list<int> *const edge_;
+            const list<edge> *const edge_;
             size_t current_;
 
             private:
-            int get_current() const
+            edge get_current() const
             {
                 if (edge_ == nullptr)
                     return -1;
@@ -25,14 +73,14 @@ namespace stuff
             }
 
             public:
-            using value_type = const int;
+            using value_type = const edge;
             using difference_type = const std::ptrdiff_t;
-            using pointer = const int*;
-            using reference = const int&;
+            using pointer = const edge*;
+            using reference = const edge&;
             using iterator_category = std::output_iterator_tag;
 
             edge_iterator() = default;
-            explicit edge_iterator(const list<int> *const e) :
+            explicit edge_iterator(const list<edge> *const e) :
                 edge_(e),
                 current_(0)
             {
@@ -83,7 +131,7 @@ namespace stuff
 
     class edges
     {
-        list<int> edge_;
+        list<edge> edge_;
         using iterator = priv::edge_iterator;
 
         public:
@@ -118,7 +166,12 @@ namespace stuff
 
         void add(int w)
         {
-            edge_.append(w);
+            edge_.append(edge(w));
+        }
+
+        void add(int w, double wg)
+        {
+            edge_.append(edge(w, wg));
         }
 
         size_t size() const
@@ -126,7 +179,7 @@ namespace stuff
             return edge_.size();
         }
 
-        void iterate(std::function<void(const int &)> fn) const
+        void iterate(std::function<void(const edge &)> fn) const
         {
             edge_.const_iterate(fn);
         }
@@ -155,8 +208,6 @@ namespace stuff
     {
         vector<edges> adj_;
         size_t edges_;
-
-        //using iterator = priv::graph_iterator;
 
         public:
         graph(int size) :
@@ -218,22 +269,11 @@ namespace stuff
         {
             int count = 0;
             for (int v = 0; v < adj_.size(); v++) {
-                adj_[v].iterate([&count, v](const auto &w) {
-                        if (v == w) count++; });
+                adj_[v].iterate([&count, v](const edge &w) {
+                        if (v == w.to) count++; });
             }
             return count / 2;
         }
-/*
-        iterator begin()
-        {
-
-        }
-
-        iterator end()
-        {
-
-        }
-        */
     };
 }
 
