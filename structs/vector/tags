@@ -1,0 +1,79 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOOLEAN	objects.h	/^    BOOLEAN,$/;"	e	enum:object_type
+CONTAINER_HEADER	objects.h	12;"	d
+CSTRING_H	cstring.h	2;"	d
+INT_TO_STR	objects.c	3;"	d	file:
+NOTHING	objects.h	/^    NOTHING,$/;"	e	enum:object_type
+NUMBER	objects.h	/^    NUMBER,$/;"	e	enum:object_type
+OBJECTS_H	objects.h	2;"	d
+OBJECT_HEADER	objects.h	8;"	d
+STRING	objects.h	/^    STRING,$/;"	e	enum:object_type
+TO_BOOLEAN	objects.h	22;"	d
+TO_NUMBER	objects.h	16;"	d
+TO_TEXT	objects.h	19;"	d
+VECTOR_H	vector.h	2;"	d
+boolean	objects.c	/^struct boolean$/;"	s	file:
+boolean	objects.h	/^typedef struct boolean boolean;$/;"	t	typeref:struct:boolean
+capacity	vector.c	/^    size_t capacity;$/;"	m	struct:vector	file:
+container	objects.h	/^struct container$/;"	s
+cstring	cstring.c	/^struct cstring$/;"	s	file:
+cstring	cstring.h	/^typedef struct cstring cstring;$/;"	t	typeref:struct:cstring
+cstring.c	cstring.c	1;"	F
+cstring.h	cstring.h	1;"	F
+cstring_append	cstring.c	/^cstring *cstring_append(cstring *this, const char *str)$/;"	f
+cstring_append_cstring	cstring.c	/^cstring *cstring_append_cstring(cstring *this, cstring *that)$/;"	f
+cstring_at	cstring.c	/^char cstring_at(const cstring *const this, size_t index)$/;"	f
+cstring_clone	cstring.c	/^cstring *cstring_clone(const cstring *that)$/;"	f
+cstring_create	cstring.c	/^cstring *cstring_create(const char *str)$/;"	f
+cstring_cstr	cstring.c	/^char *cstring_cstr(cstring *this)$/;"	f
+cstring_destroy	cstring.c	/^void cstring_destroy(cstring *this)$/;"	f
+cstring_from_int	cstring.c	/^cstring *cstring_from_int(int value)$/;"	f
+cstring_size	cstring.c	/^size_t cstring_size(const cstring *const this)$/;"	f
+data	objects.c	/^    bool data;$/;"	m	struct:boolean	file:
+data	objects.c	/^    cstring *data;$/;"	m	struct:text	file:
+data	objects.c	/^    unsigned long data;$/;"	m	struct:number	file:
+items	vector.c	/^    object **items;$/;"	m	struct:vector	file:
+length	cstring.c	/^    size_t length;$/;"	m	struct:cstring	file:
+main	main.c	/^int main(void)$/;"	f
+main.c	main.c	1;"	F
+map	objects.h	/^struct map$/;"	s
+number	objects.c	/^struct number$/;"	s	file:
+number	objects.h	/^typedef struct number number;$/;"	t	typeref:struct:number
+object	objects.h	/^typedef struct object$/;"	s
+object	objects.h	/^} object;$/;"	t	typeref:struct:object
+object_add_ref	objects.c	/^object *object_add_ref(object *this)$/;"	f
+object_boolean_create	objects.c	/^object *object_boolean_create(bool data)$/;"	f
+object_container	objects.h	/^struct object_container$/;"	s
+object_number_create	objects.c	/^object *object_number_create(unsigned long data)$/;"	f
+object_release	objects.c	/^void object_release(object **this)$/;"	f
+object_text_c_create	objects.c	/^object *object_text_c_create(const char *data)$/;"	f
+object_text_create	objects.c	/^object *object_text_create(cstring *data)$/;"	f
+object_to_string	objects.c	/^const char* object_to_string(object *this)$/;"	f
+object_type	objects.h	/^typedef enum object_type$/;"	g
+object_type	objects.h	/^} object_type;$/;"	t	typeref:enum:object_type
+object_view	objects.c	/^const object *const object_view(object *this)$/;"	f
+objects.c	objects.c	1;"	F
+objects.h	objects.h	1;"	F
+printer	main.c	/^void printer(const char *s)$/;"	f
+size	cstring.c	/^    size_t size;$/;"	m	struct:cstring	file:
+str	cstring.c	/^    char str[];$/;"	m	struct:cstring	file:
+text	objects.c	/^struct text$/;"	s	file:
+text	objects.h	/^typedef struct text text;$/;"	t	typeref:struct:text
+threshold	vector.c	/^    size_t threshold;$/;"	m	struct:vector	file:
+vector	vector.c	/^struct vector$/;"	s	file:
+vector	vector.h	/^typedef struct vector vector;$/;"	t	typeref:struct:vector
+vector.c	vector.c	1;"	F
+vector.h	vector.h	1;"	F
+vector_at	vector.c	/^object *vector_at(vector *this, size_t index)$/;"	f
+vector_create	vector.c	/^vector *vector_create()$/;"	f
+vector_for_each	vector.c	/^void vector_for_each(vector *this, void (*cb)(const char*))$/;"	f
+vector_grow	vector.c	/^bool vector_grow(vector *this)$/;"	f
+vector_pop_back_object	vector.c	/^object *vector_pop_back_object(vector *this)$/;"	f
+vector_push_back_object	vector.c	/^bool vector_push_back_object(vector *this, object **data)$/;"	f
+vector_release	vector.c	/^void vector_release(vector **this)$/;"	f
+vector_shrink	vector.c	/^bool vector_shrink(vector *this)$/;"	f

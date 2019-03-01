@@ -17,4 +17,6 @@ char cstring_at(const cstring *const this, size_t index);
 cstring *cstring_append(cstring *this, const char *str);
 cstring *cstring_append_cstring(cstring *this, cstring *that);
 
+unsigned long cstring_hash(cstring *this);
+
 #endif /* CSTRING_H */

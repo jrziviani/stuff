@@ -25,5 +25,6 @@ cstring *vector_pop_back_string(vector *this);
 bool vector_pop_back_boolean(vector *this);
 
 object *vector_at(vector *this, size_t index);
+void vector_for_each(vector *this, void (*cb)(const char*));
 
 #endif /* VECTOR_H */

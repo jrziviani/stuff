@@ -1,15 +1,21 @@
 #include "cstring.h"
+#include "hash_djb2.h"
 
 #include <string.h>
-#include <limits.h>
 #include <stdio.h>
 
 struct cstring
 {
-    size_t size;
+    CONTAINER_HEADER
     size_t length;
+    unsigned long hash;
     char str[];
 };
+
+void cstring_update_hash(cstring *this)
+{
+    this->hash = hash_djb2(this->str);
+}
 
 cstring *cstring_create(const char *str)
 {
@@ -23,6 +29,7 @@ cstring *cstring_create(const char *str)
     cstr->length = 0;
     memmove(cstr->str, str, len);
     cstr->str[len] = 0;
+    cstring_update_hash(cstr);
 
     return cstr;
 }
@@ -46,8 +53,8 @@ cstring *cstring_clone(const cstring *that)
 
 cstring *cstring_from_int(int value)
 {
-    char buff[UINT_MAX + 1];
-    snprintf(buff, UINT_MAX + 1, "%d", value);
+    char buff[512];
+    snprintf(buff, 512, "%d", value);
 
     return cstring_create(buff);
 }
@@ -103,6 +110,8 @@ cstring *cstring_append(cstring *this, const char *str)
     cstr->str[cstr->size] = '\0';
     cstr->length = 0;
 
+    cstring_update_hash(cstr);
+
     free(this);
     return cstr;
 }
@@ -110,4 +119,13 @@ cstring *cstring_append(cstring *this, const char *str)
 cstring *cstring_append_cstring(cstring *this, cstring *that)
 {
     return cstring_append(this, that->str);
+}
+
+unsigned long cstring_hash(cstring *this)
+{
+    if (this == NULL) {
+        return 0;
+    }
+
+    return this->hash;
 }

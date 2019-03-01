@@ -1,6 +1,7 @@
 #include "vector.h"
 
 #include <string.h>
+#include <stdio.h>
 
 struct vector
 {
@@ -138,4 +139,16 @@ object *vector_at(vector *this, size_t index)
     }
 
     return object_add_ref(this->items[index]);
+}
+
+void vector_for_each(vector *this, void (*cb)(const char*))
+{
+    if (this == NULL || cb == NULL) {
+        return;
+    }
+
+    for (size_t i = 0; i < this->size; i++) {
+        //object_print(this->items[i]);
+        cb(object_to_string(this->items[i]));
+    }
 }
