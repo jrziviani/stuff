@@ -226,6 +226,17 @@ namespace stuff
             edges_++;
         }
 
+        void add_edge(int v, int w, double wg)
+        {
+            adj_[v].add(w, wg);
+            adj_[w].add(v, wg);
+        }
+
+        const vector<edges> &get_edges()
+        {
+            return adj_;
+        }
+
         const edges &adj(int v)
         {
             return adj_[v];

@@ -112,7 +112,7 @@ namespace stuff
             std::swap(arr_[position_a], arr_[position_b]);
         }
 
-        T &at(size_t position)                    // O(1)
+        T &at(size_t position) const              // O(1)
         {
             if (position >= size_)
                 throw std::out_of_range("out of range");
@@ -150,7 +150,7 @@ namespace stuff
             fn(arr_[0]);
         }
 
-        T &operator[](std::size_t position)        // 0(1)
+        T &operator[](std::size_t position) const  // 0(1)
         {
             return at(position);
         }
