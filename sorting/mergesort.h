@@ -81,7 +81,7 @@ namespace stuff
     template <typename T>
     void mergesort(vector<T> &v, std::function<bool(const T&, const T&)> fn)
     {
-        mergesort_iter(v, 0, v.size(), fn);
+        mergesort(v, 0, v.size(), fn);
     }
 
     template <typename T>
